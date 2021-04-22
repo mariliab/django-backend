@@ -10,10 +10,11 @@ class UserCreate(Mutation):
 
     class Arguments:
         email = String(required=True)
+        username = String(required=True)
         password = String(required=True)
 
-    def mutate(self, email, password):
-        user = User(email=email)
+    def mutate(self, info, email, username, password):
+        user = User(email=email, username=username)
         user.set_password(password)
         user.save()
         return UserCreate(user=user)
